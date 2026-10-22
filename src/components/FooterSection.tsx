@@ -48,9 +48,9 @@ export const FooterSection: React.FC = () => {
             <span>ACCEPTING SELECT Q2/Q3 2026 ENGAGEMENTS</span>
           </div>
 
-          <h2 className="text-4xl sm:text-6xl md:text-7xl lg:text-[5.8rem] font-extrabold tracking-tight text-white leading-[1.02] font-display">
+          <h2 style={{ fontSize: '81.8px' }} className="font-extrabold tracking-tight text-white leading-[1.02] font-display text-[81.8px]">
             LET'S BUILD SOMETHING <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-[#e4e4e7] to-[#ccff00]">
+            <span style={{ fontSize: '81.8px' }} className="text-[81.8px] text-transparent bg-clip-text bg-gradient-to-r from-white via-[#e4e4e7] to-[#ccff00]">
               UNFORGETTABLE.
             </span>
           </h2>
