@@ -1,0 +1,109 @@
+@import "tailwindcss";
+
+@theme {
+  --font-display: 'Syne', sans-serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --color-acid: #ccff00;
+  --color-acid-citron: #d4ff3f;
+  --color-surface-dark: #0a0c0a;
+  --color-surface-card: #111412;
+  --color-surface-card-hover: #161a17;
+  --color-border-subtle: #1e2420;
+}
+
+:root {
+  color-scheme: dark;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: #070707;
+  color: #f4f4f5;
+  overflow-x: hidden;
+}
+
+/* Architectural typography */
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-mono-tabular {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* Subtle Film Grain Noise Overlay */
+.grain-overlay {
+  background-image: radial-gradient(rgba(204, 255, 0, 0.04) 1px, transparent 0);
+  background-size: 28px 28px;
+}
+
+/* Custom WebKit Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+::-webkit-scrollbar-thumb {
+  background: #232724;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ccff00;
+}
+
+/* Smooth Infinite Marquee Keyframes */
+@keyframes marquee-left {
+  0% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes marquee-right {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0%);
+  }
+}
+
+.animate-marquee-left {
+  display: flex;
+  width: max-content;
+  animation: marquee-left 32s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-slow {
+  display: flex;
+  width: max-content;
+  animation: marquee-left 48s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-right {
+  display: flex;
+  width: max-content;
+  animation: marquee-right 36s linear infinite;
+  will-change: transform;
+}
+
+.pause-on-hover:hover {
+  animation-play-state: paused;
+}
+
+/* Acid glow utility */
+.glow-acid-sm {
+  box-shadow: 0 0 20px -5px rgba(204, 255, 0, 0.35);
+}
+
+.glow-acid-lg {
+  box-shadow: 0 0 45px -8px rgba(204, 255, 0, 0.45);
+}
