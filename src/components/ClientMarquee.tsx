@@ -41,14 +41,14 @@ export const ClientMarquee: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
           <div>
-            <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#8e9290] mb-2">
+            <div className="flex flex-wrap items-center gap-2 text-[10px] sm:text-xs font-mono uppercase tracking-widest text-[#8e9290] mb-2">
               <span className="text-[#ccff00]">GLOBAL CLIENT PORTFOLIO</span>
               <span aria-hidden="true">·</span>
               <span>10 ENTERPRISE PARTNERS</span>
               <span aria-hidden="true">·</span>
               <span>ESTABLISHED 2023–2026</span>
             </div>
-            <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-white font-display">
+            <h2 className="text-xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-white font-display break-words">
               Trusted by 10 Industry Vanguard Brands
             </h2>
           </div>

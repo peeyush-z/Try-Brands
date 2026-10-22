@@ -38,16 +38,16 @@ export const HeroSection: React.FC = () => {
           className={`w-full h-full object-cover opacity-25 scale-105 transition-opacity duration-1000 ${
             videoLoaded ? 'opacity-25' : 'opacity-0'
           }`}
-          src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4"
+          src="/videos/hero-reel.mp4"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#070707] via-[#070707]/70 to-[#070707]/90" />
         <div className="absolute inset-0 grain-overlay opacity-60" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full my-auto">
-        <div className="max-w-4xl space-y-8">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full my-auto overflow-hidden">
+        <div className="max-w-4xl space-y-6 sm:space-y-8">
           {/* Subtle Category Kicker - Clean unboxed text */}
-          <div className="flex items-center gap-3 text-xs font-mono uppercase tracking-widest text-[#8e9290]">
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-[10px] sm:text-xs font-mono uppercase tracking-widest text-[#8e9290]">
             <span className="text-[#ccff00]">TRY-BRANDS STUDIO</span>
             <span aria-hidden="true" className="text-[#2e3731]">/</span>
             <span>RNO1-INSPIRED DIGITAL FLAGSHIP</span>
@@ -56,7 +56,7 @@ export const HeroSection: React.FC = () => {
           </div>
 
           {/* Kinetic Headline */}
-          <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-extrabold tracking-tight text-white leading-[1.02] font-display text-balance">
+          <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-[5.5rem] font-extrabold tracking-tight text-white leading-[1.04] font-display break-words max-w-full">
             ARCHITECTS OF <br />
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-[#f0f0f0] to-[#ccff00]">
               DIGITAL DESIRE.

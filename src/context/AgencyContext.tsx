@@ -92,12 +92,12 @@ interface AgencyContextType {
 const AgencyContext = createContext<AgencyContextType | undefined>(undefined);
 
 const STORAGE_KEYS = {
-  REELS: 'trybrands_reels_v2',
-  CLIENTS: 'trybrands_clients_v2',
-  CASES: 'trybrands_cases_v2',
-  TESTIMONIALS: 'trybrands_testimonials_v2',
-  INQUIRIES: 'trybrands_inquiries_v2',
-  ADMIN_AUTH: 'trybrands_admin_auth_v2',
+  REELS: 'trybrands_reels_v3',
+  CLIENTS: 'trybrands_clients_v3',
+  CASES: 'trybrands_cases_v3',
+  TESTIMONIALS: 'trybrands_testimonials_v3',
+  INQUIRIES: 'trybrands_inquiries_v3',
+  ADMIN_AUTH: 'trybrands_admin_auth_v3',
 };
 
 export const AgencyProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -107,8 +107,8 @@ export const AgencyProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       const stored = localStorage.getItem(STORAGE_KEYS.REELS);
       if (stored) {
         const parsed = JSON.parse(stored) as ReelItem[];
-        // Ensure ShaastraYog reel is present
-        if (!parsed.some((r) => r.id === 'reel-shaastrayog-shilajit')) {
+        // Reset if legacy inaccessible external video URL is found or ShaastraYog missing
+        if (!parsed.some((r) => r.id === 'reel-shaastrayog-shilajit') || parsed.some((r) => r.videoUrl.includes('commondatastorage'))) {
           return SEED_REELS;
         }
         return parsed;
@@ -141,7 +141,7 @@ export const AgencyProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       const stored = localStorage.getItem(STORAGE_KEYS.CASES);
       if (stored) {
         const parsed = JSON.parse(stored) as CaseStudy[];
-        if (!parsed.some((cs) => cs.id === 'case-shaastrayog')) {
+        if (!parsed.some((cs) => cs.id === 'case-shaastrayog') || parsed.some((cs) => cs.heroMediaUrl.includes('commondatastorage'))) {
           return SEED_CASE_STUDIES;
         }
         return parsed;

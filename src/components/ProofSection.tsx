@@ -31,12 +31,12 @@ export const ProofSection: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Kinetic Metric Counters Grid */}
         <div className="mb-20">
-          <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#8e9290] mb-2">
+          <div className="flex flex-wrap items-center gap-2 text-[10px] sm:text-xs font-mono uppercase tracking-widest text-[#8e9290] mb-2">
             <span className="text-[#ccff00]">QUANTITATIVE RIGOR</span>
             <span aria-hidden="true">·</span>
             <span>MEASURABLE ENTERPRISE OUTCOMES</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white font-display mb-12">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white font-display break-words mb-12">
             Proof of Transformational Impact
           </h2>
 

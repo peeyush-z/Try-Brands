@@ -23,7 +23,7 @@ export const Navbar: React.FC = () => {
 
   return (
     <header className="sticky top-0 z-40 w-full border-b border-[#1f2621]/80 bg-[#070707]/85 backdrop-blur-md transition-colors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-8">
+      <div className="max-w-7xl mx-auto px-3 sm:px-6 lg:px-8 h-16 sm:h-20 flex items-center justify-between gap-2 sm:gap-8">
         {/* Zone 1: Single text element wordmark */}
         <a
           href="#"
@@ -34,10 +34,10 @@ export const Navbar: React.FC = () => {
           }}
           onMouseEnter={() => setCursor('hover', 'HOME')}
           onMouseLeave={() => setCursor('default')}
-          className="group flex items-center gap-2 whitespace-nowrap shrink-0 text-xl font-bold tracking-tight text-white transition-opacity hover:opacity-90 font-display"
+          className="group flex items-center gap-1.5 sm:gap-2 whitespace-nowrap shrink-0 text-base sm:text-xl font-bold tracking-tight text-white transition-opacity hover:opacity-90 font-display"
         >
           <span className="text-[#ccff00]">TRY-BRANDS</span>
-          <span className="text-[10px] uppercase font-mono tracking-widest text-[#8e9290] group-hover:text-[#ccff00] transition-colors">®</span>
+          <span className="text-[9px] sm:text-[10px] uppercase font-mono tracking-widest text-[#8e9290] group-hover:text-[#ccff00] transition-colors">®</span>
         </a>
 
         {/* Zone 2: 4-5 concise single-line text navigation links */}
@@ -85,17 +85,17 @@ export const Navbar: React.FC = () => {
         </nav>
 
         {/* Zone 3: 1 primary action area */}
-        <div className="flex items-center gap-3 shrink-0">
+        <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">
           {/* Sound / sensory cue toggle */}
           <button
             onClick={toggleSound}
             onMouseEnter={() => setCursor('hover')}
             onMouseLeave={() => setCursor('default')}
-            className="p-2.5 rounded-lg border border-[#1f2621] text-[#a1a1aa] hover:text-[#ccff00] hover:border-[#ccff00]/40 transition-colors bg-[#0f1210] cursor-pointer"
+            className="p-2 sm:p-2.5 rounded-lg border border-[#1f2621] text-[#a1a1aa] hover:text-[#ccff00] hover:border-[#ccff00]/40 transition-colors bg-[#0f1210] cursor-pointer"
             title={isMuted ? 'Unmute Sensory Audio' : 'Mute Sensory Audio'}
             aria-label="Toggle Sound"
           >
-            {isMuted ? <VolumeX className="w-4 h-4 text-[#8e9290]" /> : <Volume2 className="w-4 h-4 text-[#ccff00]" />}
+            {isMuted ? <VolumeX className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#8e9290]" /> : <Volume2 className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-[#ccff00]" />}
           </button>
 
           {/* Admin CMS portal shortcut */}
@@ -121,11 +121,11 @@ export const Navbar: React.FC = () => {
             }}
             onMouseEnter={() => setCursor('hover', 'INITIATE')}
             onMouseLeave={() => setCursor('default')}
-            className="group flex items-center gap-1.5 px-3 sm:px-5 py-2 sm:py-2.5 text-xs font-bold font-mono tracking-wider text-black bg-[#ccff00] hover:bg-[#d4ff3f] active:scale-95 rounded-lg transition-all shadow-[0_0_20px_-6px_rgba(204,255,0,0.4)] whitespace-nowrap shrink-0 cursor-pointer"
+            className="group flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-5 py-2 sm:py-2.5 text-xs font-bold font-mono tracking-wider text-black bg-[#ccff00] hover:bg-[#d4ff3f] active:scale-95 rounded-lg transition-all shadow-[0_0_20px_-6px_rgba(204,255,0,0.4)] whitespace-nowrap shrink-0 cursor-pointer"
           >
             <span className="hidden sm:inline">Start a Project</span>
             <span className="sm:hidden">Inquire</span>
-            <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+            <ArrowUpRight className="w-3 h-3 sm:w-3.5 sm:h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
           </button>
 
           {/* Mobile hamburger */}
@@ -134,7 +134,7 @@ export const Navbar: React.FC = () => {
               sound.playTick(500);
               setMobileMenuOpen(!mobileMenuOpen);
             }}
-            className="md:hidden p-2 rounded-lg text-white hover:bg-[#161a17] transition-colors cursor-pointer"
+            className="md:hidden p-1.5 sm:p-2 rounded-lg text-white hover:bg-[#161a17] transition-colors cursor-pointer"
             aria-label="Toggle Navigation Menu"
           >
             {mobileMenuOpen ? <X className="w-5 h-5 text-[#ccff00]" /> : <Menu className="w-5 h-5" />}

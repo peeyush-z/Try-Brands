@@ -18,14 +18,14 @@ export const CapabilitiesMatrix: React.FC = () => {
     <section id="capabilities" className="py-24 border-b border-[#1f2621]/80 bg-[#090b0a] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="mb-14">
-          <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#8e9290] mb-2">
+          <div className="flex flex-wrap items-center gap-2 text-[10px] sm:text-xs font-mono uppercase tracking-widest text-[#8e9290] mb-2">
             <span className="text-[#ccff00]">END-TO-END CAPABILITIES</span>
             <span aria-hidden="true">·</span>
             <span>STRATEGY TO EXECUTION</span>
             <span aria-hidden="true">·</span>
             <span>AESTHETIC & TECHNICAL MASTERY</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white font-display">
+          <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white font-display break-words">
             How We Build Category Dominance
           </h2>
         </div>

@@ -31,14 +31,14 @@ export const SelectedWork: React.FC = () => {
         {/* Header & Filter Row */}
         <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-8 mb-14">
           <div>
-            <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#8e9290] mb-2">
+            <div className="flex flex-wrap items-center gap-2 text-[10px] sm:text-xs font-mono uppercase tracking-widest text-[#8e9290] mb-2">
               <span className="text-[#ccff00]">SELECTED PORTFOLIO</span>
               <span aria-hidden="true">·</span>
               <span>2024–2026 ARCHIVE</span>
               <span aria-hidden="true">·</span>
               <span>MEDIA-HEAVY SHOWCASE</span>
             </div>
-            <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white font-display">
+            <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white font-display break-words">
               Flagship Case Studies
             </h2>
           </div>
@@ -145,7 +145,7 @@ export const SelectedWork: React.FC = () => {
                 <div className="p-6 sm:p-8 flex flex-col justify-between flex-grow">
                   <div>
                     {/* Unboxed Metadata with Typographic Separators */}
-                    <div className="flex items-center gap-2 text-xs font-mono text-[#8e9290] mb-2 uppercase tracking-wide">
+                    <div className="flex flex-wrap items-center gap-2 text-xs font-mono text-[#8e9290] mb-2 uppercase tracking-wide">
                       <span className="text-[#ccff00]">{item.category}</span>
                       <span aria-hidden="true">·</span>
                       <span>{item.client}</span>
@@ -153,7 +153,7 @@ export const SelectedWork: React.FC = () => {
                       <span>Release {item.year}</span>
                     </div>
 
-                    <h3 className="text-xl sm:text-2xl font-bold text-white group-hover:text-[#ccff00] transition-colors font-display tracking-tight leading-snug">
+                    <h3 className="text-lg sm:text-2xl font-bold text-white group-hover:text-[#ccff00] transition-colors font-display tracking-tight leading-snug break-words">
                       {item.title}
                     </h3>
 

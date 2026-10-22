@@ -54,7 +54,7 @@ function AppContent() {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-[#070707] text-[#f4f4f5] selection:bg-[#ccff00] selection:text-black">
+    <div className="relative min-h-screen w-full overflow-x-hidden bg-[#070707] text-[#f4f4f5] selection:bg-[#ccff00] selection:text-black">
       {/* Interactive Follower Cursor */}
       <CustomCursor />
 
