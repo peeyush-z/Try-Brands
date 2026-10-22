@@ -16,6 +16,7 @@ export interface ReelItem {
   tags: string[];
   views: string;
   aspectRatio: '9:16';
+  externalUrl?: string;
   isActive: boolean;
   order: number;
 }
@@ -58,6 +59,8 @@ export interface ClientBrand {
   partnershipYear: string;
   symbolText: string;
   logoDescription: string;
+  logoUrl?: string;
+  websiteUrl?: string;
   isActive: boolean;
   order: number;
 }

@@ -96,30 +96,25 @@ export const ReelsShowcase: React.FC = () => {
                 }}
                 className="group relative w-64 sm:w-72 md:w-80 h-[440px] sm:h-[490px] md:h-[520px] rounded-2xl overflow-hidden bg-[#111412] border border-[#222a24] hover:border-[#ccff00] transition-all duration-300 shadow-xl flex-shrink-0 cursor-pointer select-none"
               >
-                {/* 9:16 Media Preview: Auto-plays muted loop on hover or shows high-res poster */}
+                {/* 9:16 Media Preview: Continuous video loop */}
                 <div className="absolute inset-0 w-full h-full bg-[#0d0f0e]">
-                  <img
-                    src={reel.thumbnailUrl}
-                    alt={reel.title}
-                    referrerPolicy="no-referrer"
-                    className={`w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 ${
-                      isHovered ? 'opacity-30' : 'opacity-85'
-                    }`}
+                  <video
+                    src={reel.videoUrl}
+                    poster={reel.thumbnailUrl}
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    preload="auto"
+                    onCanPlay={(e) => {
+                      const v = e.currentTarget;
+                      v.muted = true;
+                      v.play().catch(() => {});
+                    }}
+                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105 opacity-90 group-hover:opacity-100"
                   />
 
-                  {/* Video preview on hover */}
-                  {isHovered && (
-                    <video
-                      src={reel.videoUrl}
-                      autoPlay
-                      muted
-                      loop
-                      playsInline
-                      className="absolute inset-0 w-full h-full object-cover"
-                    />
-                  )}
-
-                  {/* Scrim overlay for contrast */}
+                  {/* Scrim overlay for typography contrast */}
                   <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-black/40 group-hover:via-black/20 transition-opacity" />
                 </div>
 

@@ -12,7 +12,7 @@ export const ReelModal: React.FC = () => {
   const { activeReel, setActiveReel, setCursor } = useAgency();
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(true);
-  const [isAudioMuted, setIsAudioMuted] = useState(false);
+  const [isAudioMuted, setIsAudioMuted] = useState(true);
   const [progress, setProgress] = useState(0);
 
   useEffect(() => {
@@ -117,6 +117,7 @@ export const ReelModal: React.FC = () => {
           <video
             ref={videoRef}
             src={activeReel.videoUrl}
+            poster={activeReel.thumbnailUrl}
             autoPlay
             loop
             playsInline
@@ -147,7 +148,7 @@ export const ReelModal: React.FC = () => {
         </div>
 
         {/* Bottom Details & Attribution */}
-        <div className="p-4 sm:p-5 bg-[#0e110f] border-t border-[#1f2621] space-y-2 z-20">
+        <div className="p-4 sm:p-5 bg-[#0e110f] border-t border-[#1f2621] space-y-2.5 z-20">
           <div className="flex items-center justify-between">
             <h3 className="text-base sm:text-lg font-bold text-white font-display">
               {activeReel.title}
@@ -161,10 +162,25 @@ export const ReelModal: React.FC = () => {
             {activeReel.caption}
           </p>
 
-          <div className="flex flex-wrap items-center gap-2 pt-1 text-[11px] font-mono text-[#8e9290]">
-            {activeReel.tags.map((tag, i) => (
-              <span key={i} className="text-[#8e9290]">#{tag}</span>
-            ))}
+          <div className="flex flex-wrap items-center justify-between gap-2 pt-1 border-t border-[#1a201c]">
+            <div className="flex flex-wrap items-center gap-1.5 text-[11px] font-mono text-[#8e9290]">
+              {activeReel.tags.map((tag, i) => (
+                <span key={i} className="text-[#8e9290]">{tag.startsWith('#') ? tag : `#${tag}`}</span>
+              ))}
+            </div>
+
+            {activeReel.externalUrl && (
+              <a
+                href={activeReel.externalUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={(e) => e.stopPropagation()}
+                className="px-2.5 py-1 rounded bg-[#ccff00] hover:bg-[#d4ff3f] text-black font-mono text-[10px] font-bold uppercase tracking-wider flex items-center gap-1 transition-colors"
+              >
+                <span>Watch on Instagram Reel</span>
+                <span aria-hidden="true">↗</span>
+              </a>
+            )}
           </div>
         </div>
       </div>

@@ -48,6 +48,7 @@ export const AdminDashboard: React.FC = () => {
     toggleCaseStudyVisibility,
     reorderCaseStudies,
     clients,
+    addClient,
     updateClient,
     deleteClient,
     toggleClientVisibility,
@@ -62,7 +63,7 @@ export const AdminDashboard: React.FC = () => {
 
   const [passwordInput, setPasswordInput] = useState('');
   const [loginError, setLoginError] = useState('');
-  const [activeTab, setActiveTab] = useState<'reels' | 'cases' | 'clients' | 'testimonials' | 'inquiries'>('reels');
+  const [activeTab, setActiveTab] = useState<'reels' | 'cases' | 'clients' | 'testimonials' | 'inquiries' | 'sync'>('reels');
 
   // Form states for adding/editing Reel
   const [isAddingReel, setIsAddingReel] = useState(false);
@@ -93,6 +94,22 @@ export const AdminDashboard: React.FC = () => {
     deliverables: 'Brand System, WebGL Flagship, Cinema Motion',
     metrics: '+180% Growth, 3x Conversion',
   });
+
+  // Form states for adding/editing Client
+  const [isAddingClient, setIsAddingClient] = useState(false);
+  const [editingClientId, setEditingClientId] = useState<string | null>(null);
+  const [clientForm, setClientForm] = useState({
+    name: '',
+    industry: '',
+    impactMetric: '',
+    partnershipYear: '2025–2026',
+    symbolText: '',
+    logoDescription: '',
+  });
+
+  // Bulk JSON paste state
+  const [bulkJsonText, setBulkJsonText] = useState('');
+  const [bulkStatus, setBulkStatus] = useState('');
 
   if (!isAdminOpen) return null;
 
@@ -181,6 +198,92 @@ export const AdminDashboard: React.FC = () => {
     newReels[index] = newReels[targetIdx];
     newReels[targetIdx] = temp;
     reorderReels(newReels);
+  };
+
+  const handleSaveClient = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!clientForm.name.trim()) return;
+
+    if (editingClientId) {
+      updateClient(editingClientId, {
+        name: clientForm.name,
+        industry: clientForm.industry,
+        impactMetric: clientForm.impactMetric,
+        partnershipYear: clientForm.partnershipYear,
+        symbolText: clientForm.symbolText || clientForm.name.slice(0, 3).toUpperCase(),
+        logoDescription: clientForm.logoDescription,
+      });
+      setEditingClientId(null);
+    } else {
+      addClient({
+        name: clientForm.name,
+        industry: clientForm.industry,
+        impactMetric: clientForm.impactMetric,
+        partnershipYear: clientForm.partnershipYear,
+        symbolText: clientForm.symbolText || clientForm.name.slice(0, 3).toUpperCase(),
+        logoDescription: clientForm.logoDescription,
+        isActive: true,
+      });
+    }
+
+    setIsAddingClient(false);
+    setClientForm({
+      name: '',
+      industry: '',
+      impactMetric: '',
+      partnershipYear: '2025–2026',
+      symbolText: '',
+      logoDescription: '',
+    });
+  };
+
+  const startEditClient = (c: ClientBrand) => {
+    setEditingClientId(c.id);
+    setClientForm({
+      name: c.name,
+      industry: c.industry,
+      impactMetric: c.impactMetric,
+      partnershipYear: c.partnershipYear,
+      symbolText: c.symbolText,
+      logoDescription: c.logoDescription,
+    });
+    setIsAddingClient(true);
+  };
+
+  const handleExportJson = () => {
+    const data = {
+      clients,
+      reels,
+      caseStudies,
+    };
+    const jsonStr = JSON.stringify(data, null, 2);
+    setBulkJsonText(jsonStr);
+    navigator.clipboard?.writeText(jsonStr);
+    setBulkStatus('Copied full agency database JSON to clipboard!');
+    sound.playPop(700);
+    setTimeout(() => setBulkStatus(''), 4000);
+  };
+
+  const handleImportJson = () => {
+    try {
+      const parsed = JSON.parse(bulkJsonText);
+      if (parsed.clients && Array.isArray(parsed.clients)) {
+        localStorage.setItem('trybrands_clients_v1', JSON.stringify(parsed.clients));
+      }
+      if (parsed.reels && Array.isArray(parsed.reels)) {
+        localStorage.setItem('trybrands_reels_v1', JSON.stringify(parsed.reels));
+      }
+      if (parsed.caseStudies && Array.isArray(parsed.caseStudies)) {
+        localStorage.setItem('trybrands_cases_v1', JSON.stringify(parsed.caseStudies));
+      }
+      setBulkStatus('Successfully imported! Refreshing state...');
+      sound.playChime(660, 0.3);
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    } catch (err) {
+      setBulkStatus('Invalid JSON format. Please ensure valid JSON structure.');
+    }
   };
 
   return (
@@ -366,6 +469,21 @@ export const AdminDashboard: React.FC = () => {
                 >
                   <Mail className="w-3.5 h-3.5" />
                   <span>Inquiries ({inquiries.length})</span>
+                </button>
+
+                <button
+                  onClick={() => {
+                    sound.playTick(600);
+                    setActiveTab('sync');
+                  }}
+                  className={`flex items-center gap-2 px-3.5 py-2 text-xs font-mono rounded-lg transition-all cursor-pointer whitespace-nowrap ${
+                    activeTab === 'sync'
+                      ? 'bg-[#ccff00] text-black font-bold'
+                      : 'text-[#8e9290] hover:text-white'
+                  }`}
+                >
+                  <Save className="w-3.5 h-3.5" />
+                  <span>Quick JSON & Client Sync</span>
                 </button>
               </div>
 
@@ -683,23 +801,151 @@ export const AdminDashboard: React.FC = () => {
               {/* TAB 3: 10 CLIENTS */}
               {activeTab === 'clients' && (
                 <div className="space-y-6">
-                  <div>
-                    <h3 className="text-xl font-bold font-display">
-                      10 Enterprise Client Marquee Brands
-                    </h3>
-                    <p className="text-xs text-[#8e9290] font-mono">
-                      Edit client metrics, company names, industry labels, and active status for the marquee.
-                    </p>
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <h3 className="text-xl font-bold font-display">
+                        10 Enterprise Client Marquee Brands ({clients.length})
+                      </h3>
+                      <p className="text-xs text-[#8e9290] font-mono">
+                        Add or edit client metrics, logos, industries, and visibility on the infinite homepage marquee.
+                      </p>
+                    </div>
+
+                    <button
+                      onClick={() => {
+                        sound.playTick(600);
+                        setEditingClientId(null);
+                        setIsAddingClient(!isAddingClient);
+                      }}
+                      className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#ccff00] text-black font-bold font-mono text-xs uppercase transition-colors cursor-pointer"
+                    >
+                      <Plus className="w-3.5 h-3.5" />
+                      <span>{isAddingClient ? 'Cancel' : 'Add Client Brand'}</span>
+                    </button>
                   </div>
+
+                  {/* Add / Edit Client Form Drawer */}
+                  {isAddingClient && (
+                    <form
+                      onSubmit={handleSaveClient}
+                      className="p-5 rounded-2xl bg-[#0e1210] border border-[#2a362e] space-y-4 animate-fadeIn"
+                    >
+                      <div className="text-sm font-bold font-display text-[#ccff00]">
+                        {editingClientId ? 'Edit Client Brand' : 'Add New Client Partner'}
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-xs font-mono text-[#8e9290] mb-1">
+                            Client Brand Name *
+                          </label>
+                          <input
+                            type="text"
+                            required
+                            placeholder="e.g. Apex Hyperwear"
+                            value={clientForm.name}
+                            onChange={(e) => setClientForm({ ...clientForm, name: e.target.value })}
+                            className="w-full px-3 py-2 rounded-lg bg-[#141a16] border border-[#232b25] text-xs text-white"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-xs font-mono text-[#8e9290] mb-1">
+                            Industry / Sector *
+                          </label>
+                          <input
+                            type="text"
+                            required
+                            placeholder="e.g. High-Performance Biomechanics"
+                            value={clientForm.industry}
+                            onChange={(e) => setClientForm({ ...clientForm, industry: e.target.value })}
+                            className="w-full px-3 py-2 rounded-lg bg-[#141a16] border border-[#232b25] text-xs text-white"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-xs font-mono text-[#8e9290] mb-1">
+                            Verified Outcome Metric
+                          </label>
+                          <input
+                            type="text"
+                            placeholder="e.g. +240% D2C Growth"
+                            value={clientForm.impactMetric}
+                            onChange={(e) => setClientForm({ ...clientForm, impactMetric: e.target.value })}
+                            className="w-full px-3 py-2 rounded-lg bg-[#141a16] border border-[#232b25] text-xs text-white font-mono"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-xs font-mono text-[#8e9290] mb-1">
+                            Partnership Years
+                          </label>
+                          <input
+                            type="text"
+                            placeholder="e.g. 2024–2026"
+                            value={clientForm.partnershipYear}
+                            onChange={(e) => setClientForm({ ...clientForm, partnershipYear: e.target.value })}
+                            className="w-full px-3 py-2 rounded-lg bg-[#141a16] border border-[#232b25] text-xs text-white font-mono"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-xs font-mono text-[#8e9290] mb-1">
+                            Logo Monogram / Symbol Text (2-4 letters)
+                          </label>
+                          <input
+                            type="text"
+                            placeholder="e.g. APX"
+                            value={clientForm.symbolText}
+                            onChange={(e) => setClientForm({ ...clientForm, symbolText: e.target.value })}
+                            className="w-full px-3 py-2 rounded-lg bg-[#141a16] border border-[#232b25] text-xs text-white font-mono uppercase"
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-xs font-mono text-[#8e9290] mb-1">
+                            Logo Description / Subtitle
+                          </label>
+                          <input
+                            type="text"
+                            placeholder="e.g. Biomechanical apparel architecture"
+                            value={clientForm.logoDescription}
+                            onChange={(e) => setClientForm({ ...clientForm, logoDescription: e.target.value })}
+                            className="w-full px-3 py-2 rounded-lg bg-[#141a16] border border-[#232b25] text-xs text-white font-mono"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="flex justify-end gap-3 pt-2">
+                        <button
+                          type="button"
+                          onClick={() => setIsAddingClient(false)}
+                          className="px-4 py-2 rounded-lg border border-[#232b25] text-xs font-mono text-[#8e9290]"
+                        >
+                          Cancel
+                        </button>
+                        <button
+                          type="submit"
+                          className="px-5 py-2 rounded-lg bg-[#ccff00] text-black font-bold font-mono text-xs uppercase"
+                        >
+                          {editingClientId ? 'Update Client' : 'Add to Marquee'}
+                        </button>
+                      </div>
+                    </form>
+                  )}
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {clients.map((client) => (
                       <div
                         key={client.id}
-                        className="p-4 rounded-xl border border-[#222a24] bg-[#0e1210] flex items-center justify-between"
+                        className={`p-4 rounded-xl border flex items-center justify-between transition-all ${
+                          client.isActive
+                            ? 'border-[#222a24] bg-[#0e1210]'
+                            : 'border-[#181d1a] bg-[#090b0a] opacity-60'
+                        }`}
                       >
                         <div className="flex items-center gap-3">
-                          <div className="w-8 h-8 rounded bg-[#171f19] border border-[#2a362e] text-[#ccff00] font-bold flex items-center justify-center text-xs">
+                          <div className="w-10 h-10 rounded-lg bg-[#171f19] border border-[#2a362e] text-[#ccff00] font-bold flex items-center justify-center text-xs">
                             {client.symbolText.slice(0, 3)}
                           </div>
                           <div>
@@ -709,15 +955,35 @@ export const AdminDashboard: React.FC = () => {
                             <div className="text-xs text-[#8e9290] font-mono">
                               {client.impactMetric} · {client.partnershipYear}
                             </div>
+                            <div className="text-[11px] text-[#71717a] font-sans">
+                              {client.industry}
+                            </div>
                           </div>
                         </div>
 
-                        <button
-                          onClick={() => toggleClientVisibility(client.id)}
-                          className="p-1.5 rounded bg-[#161d18] text-[#8e9290] hover:text-[#ccff00] cursor-pointer"
-                        >
-                          {client.isActive ? <Eye className="w-3.5 h-3.5 text-[#ccff00]" /> : <EyeOff className="w-3.5 h-3.5" />}
-                        </button>
+                        <div className="flex items-center gap-1.5">
+                          <button
+                            onClick={() => toggleClientVisibility(client.id)}
+                            className="p-1.5 rounded bg-[#161d18] text-[#8e9290] hover:text-[#ccff00] cursor-pointer"
+                            title={client.isActive ? 'Hide from homepage marquee' : 'Show on marquee'}
+                          >
+                            {client.isActive ? <Eye className="w-3.5 h-3.5 text-[#ccff00]" /> : <EyeOff className="w-3.5 h-3.5" />}
+                          </button>
+                          <button
+                            onClick={() => startEditClient(client)}
+                            className="p-1.5 rounded bg-[#161d18] text-[#8e9290] hover:text-white cursor-pointer"
+                            title="Edit Client"
+                          >
+                            <Edit2 className="w-3.5 h-3.5" />
+                          </button>
+                          <button
+                            onClick={() => deleteClient(client.id)}
+                            className="p-1.5 rounded bg-[#161d18] text-red-400 hover:text-red-300 cursor-pointer"
+                            title="Delete Client"
+                          >
+                            <Trash2 className="w-3.5 h-3.5" />
+                          </button>
+                        </div>
                       </div>
                     ))}
                   </div>
@@ -823,6 +1089,75 @@ export const AdminDashboard: React.FC = () => {
                       ))}
                     </div>
                   )}
+                </div>
+              )}
+
+              {/* TAB 6: QUICK JSON & CLIENT DATA SYNC */}
+              {activeTab === 'sync' && (
+                <div className="space-y-6">
+                  <div>
+                    <h3 className="text-xl font-bold font-display">
+                      Quick Client & Media Data Sync
+                    </h3>
+                    <p className="text-xs text-[#8e9290] font-mono">
+                      Export, backup, or paste your complete client roster, 9:16 reels, and portfolio case studies in structured JSON.
+                    </p>
+                  </div>
+
+                  {bulkStatus && (
+                    <div className="p-3 rounded-lg bg-[#161d18] border border-[#ccff00] text-xs text-[#ccff00] font-mono flex items-center gap-2">
+                      <CheckCircle className="w-4 h-4" />
+                      <span>{bulkStatus}</span>
+                    </div>
+                  )}
+
+                  <div className="flex flex-wrap items-center gap-3">
+                    <button
+                      onClick={handleExportJson}
+                      className="flex items-center gap-2 px-4 py-2.5 rounded-lg bg-[#ccff00] text-black font-bold font-mono text-xs uppercase cursor-pointer"
+                    >
+                      <Save className="w-3.5 h-3.5" />
+                      <span>Export Current Database to Clipboard</span>
+                    </button>
+                    <button
+                      onClick={handleImportJson}
+                      disabled={!bulkJsonText.trim()}
+                      className="flex items-center gap-2 px-4 py-2.5 rounded-lg border border-[#232b25] bg-[#121614] hover:border-[#ccff00] text-white disabled:opacity-40 font-mono text-xs uppercase cursor-pointer"
+                    >
+                      <Plus className="w-3.5 h-3.5" />
+                      <span>Apply & Import Pasted JSON</span>
+                    </button>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-mono text-[#8e9290] mb-2 uppercase">
+                      Paste or Edit Agency Database JSON
+                    </label>
+                    <textarea
+                      rows={14}
+                      value={bulkJsonText}
+                      onChange={(e) => setBulkJsonText(e.target.value)}
+                      placeholder={`{\n  "clients": [\n    {\n      "id": "client-1",\n      "name": "Your Brand Name",\n      "industry": "Fintech / Mobility / AI",\n      "impactMetric": "+250% Growth",\n      "partnershipYear": "2025–2026",\n      "symbolText": "YBN",\n      "logoDescription": "Brand Architecture",\n      "isActive": true,\n      "order": 1\n    }\n  ],\n  "reels": [...],\n  "caseStudies": [...]\n}`}
+                      className="w-full p-4 rounded-xl bg-[#090b0a] border border-[#232b25] font-mono text-xs text-[#d4d4d8] focus:border-[#ccff00] focus:outline-none"
+                    />
+                  </div>
+
+                  <div className="p-4 rounded-xl bg-[#0e1210] border border-[#222a24] space-y-2 text-xs font-mono text-[#8e9290]">
+                    <div className="text-white font-bold text-xs uppercase tracking-wider">
+                      💡 How to share your client info in chat:
+                    </div>
+                    <p>
+                      You can also simply type or paste your client list directly in our chat message anytime using this simple structure:
+                    </p>
+                    <div className="p-3 rounded bg-black/60 text-[#ccff00] text-[11px] font-mono">
+                      1. Brand Name: Apex Hyperwear<br />
+                      2. Industry: Biomechanical Technical Apparel<br />
+                      3. Key Metric: +240% D2C Growth or Series B Raised<br />
+                      4. Years: 2024–2026<br />
+                      5. Logo/Symbol: APX or link to SVG/PNG logo<br />
+                      6. Reel Video URL: https://example.com/video.mp4
+                    </div>
+                  </div>
                 </div>
               )}
             </div>

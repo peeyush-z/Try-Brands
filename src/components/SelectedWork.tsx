@@ -92,18 +92,30 @@ export const SelectedWork: React.FC = () => {
                   isMarqueeItem ? 'md:col-span-2' : 'col-span-1'
                 }`}
               >
-                {/* Media Container with Zoom & Scrub */}
+                {/* Media Container with Live Video Loop & Zoom */}
                 <div
                   className={`relative w-full overflow-hidden bg-[#0a0a0a] ${
                     isMarqueeItem ? 'h-[360px] sm:h-[480px] lg:h-[560px]' : 'h-[300px] sm:h-[380px]'
                   }`}
                 >
-                  <img
-                    src={item.heroMediaUrl}
-                    alt={item.title}
-                    referrerPolicy="no-referrer"
-                    className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-                  />
+                  {item.heroMediaType === 'video' || item.heroMediaUrl.endsWith('.mp4') ? (
+                    <video
+                      src={item.heroMediaUrl}
+                      poster={item.thumbnailUrl}
+                      autoPlay
+                      muted
+                      loop
+                      playsInline
+                      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    />
+                  ) : (
+                    <img
+                      src={item.heroMediaUrl}
+                      alt={item.title}
+                      referrerPolicy="no-referrer"
+                      className="w-full h-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                    />
+                  )}
 
                   {/* Dark Vignette Scrim */}
                   <div className="absolute inset-0 bg-gradient-to-t from-[#070707] via-transparent to-black/30" />

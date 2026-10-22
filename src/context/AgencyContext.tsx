@@ -92,12 +92,12 @@ interface AgencyContextType {
 const AgencyContext = createContext<AgencyContextType | undefined>(undefined);
 
 const STORAGE_KEYS = {
-  REELS: 'trybrands_reels_v1',
-  CLIENTS: 'trybrands_clients_v1',
-  CASES: 'trybrands_cases_v1',
-  TESTIMONIALS: 'trybrands_testimonials_v1',
-  INQUIRIES: 'trybrands_inquiries_v1',
-  ADMIN_AUTH: 'trybrands_admin_auth_v1',
+  REELS: 'trybrands_reels_v2',
+  CLIENTS: 'trybrands_clients_v2',
+  CASES: 'trybrands_cases_v2',
+  TESTIMONIALS: 'trybrands_testimonials_v2',
+  INQUIRIES: 'trybrands_inquiries_v2',
+  ADMIN_AUTH: 'trybrands_admin_auth_v2',
 };
 
 export const AgencyProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
@@ -105,7 +105,15 @@ export const AgencyProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const [reels, setReels] = useState<ReelItem[]>(() => {
     try {
       const stored = localStorage.getItem(STORAGE_KEYS.REELS);
-      return stored ? JSON.parse(stored) : SEED_REELS;
+      if (stored) {
+        const parsed = JSON.parse(stored) as ReelItem[];
+        // Ensure ShaastraYog reel is present
+        if (!parsed.some((r) => r.id === 'reel-shaastrayog-shilajit')) {
+          return SEED_REELS;
+        }
+        return parsed;
+      }
+      return SEED_REELS;
     } catch {
       return SEED_REELS;
     }
@@ -114,7 +122,15 @@ export const AgencyProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const [clients, setClients] = useState<ClientBrand[]>(() => {
     try {
       const stored = localStorage.getItem(STORAGE_KEYS.CLIENTS);
-      return stored ? JSON.parse(stored) : SEED_CLIENTS;
+      if (stored) {
+        const parsed = JSON.parse(stored) as ClientBrand[];
+        // Ensure ShaastraYog brand is present
+        if (!parsed.some((c) => c.id === 'client-shaastrayog')) {
+          return SEED_CLIENTS;
+        }
+        return parsed;
+      }
+      return SEED_CLIENTS;
     } catch {
       return SEED_CLIENTS;
     }
@@ -123,7 +139,14 @@ export const AgencyProvider: React.FC<{ children: React.ReactNode }> = ({ childr
   const [caseStudies, setCaseStudies] = useState<CaseStudy[]>(() => {
     try {
       const stored = localStorage.getItem(STORAGE_KEYS.CASES);
-      return stored ? JSON.parse(stored) : SEED_CASE_STUDIES;
+      if (stored) {
+        const parsed = JSON.parse(stored) as CaseStudy[];
+        if (!parsed.some((cs) => cs.id === 'case-shaastrayog')) {
+          return SEED_CASE_STUDIES;
+        }
+        return parsed;
+      }
+      return SEED_CASE_STUDIES;
     } catch {
       return SEED_CASE_STUDIES;
     }

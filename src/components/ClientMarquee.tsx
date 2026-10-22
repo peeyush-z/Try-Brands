@@ -121,12 +121,35 @@ export const ClientMarquee: React.FC = () => {
 
                 {/* Brand Typographic Monogram / Logo Mark */}
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-lg bg-[#161d18] border border-[#263129] flex items-center justify-center font-display font-extrabold text-[#ccff00] text-sm tracking-wider group-hover:scale-105 group-hover:border-[#ccff00]/40 transition-transform">
-                    {client.symbolText.slice(0, 3)}
-                  </div>
+                  {client.logoUrl ? (
+                    <div className="w-12 h-12 rounded-lg bg-white/95 border border-[#263129] p-1 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform overflow-hidden shadow-md">
+                      <img
+                        src={client.logoUrl}
+                        alt={`${client.name} logo`}
+                        className="w-full h-full object-contain"
+                        loading="lazy"
+                      />
+                    </div>
+                  ) : (
+                    <div className="w-10 h-10 rounded-lg bg-[#161d18] border border-[#263129] flex items-center justify-center font-display font-extrabold text-[#ccff00] text-sm tracking-wider group-hover:scale-105 group-hover:border-[#ccff00]/40 transition-transform">
+                      {client.symbolText.slice(0, 3)}
+                    </div>
+                  )}
                   <div>
-                    <h3 className="text-lg font-bold text-white group-hover:text-[#ccff00] transition-colors font-display tracking-tight">
-                      {client.name}
+                    <h3 className="text-lg font-bold text-white group-hover:text-[#ccff00] transition-colors font-display tracking-tight flex items-center gap-1.5">
+                      <span>{client.name}</span>
+                      {client.websiteUrl && (
+                        <a
+                          href={client.websiteUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          onClick={(e) => e.stopPropagation()}
+                          className="text-[#8e9290] hover:text-[#ccff00] transition-colors"
+                          title="Visit official website"
+                        >
+                          <ArrowRight className="w-3 h-3 -rotate-45" />
+                        </a>
+                      )}
                     </h3>
                     <p className="text-xs text-[#8e9290] font-sans">
                       {client.industry}

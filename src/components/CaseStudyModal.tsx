@@ -64,12 +64,24 @@ export const CaseStudyModal: React.FC = () => {
         <div className="overflow-y-auto p-6 sm:p-10 lg:p-12 space-y-12">
           {/* Hero Media Banner */}
           <div className="relative w-full h-[320px] sm:h-[440px] rounded-2xl overflow-hidden border border-[#222a24]">
-            <img
-              src={activeCaseStudy.heroMediaUrl}
-              alt={activeCaseStudy.title}
-              referrerPolicy="no-referrer"
-              className="w-full h-full object-cover"
-            />
+            {activeCaseStudy.heroMediaType === 'video' || activeCaseStudy.heroMediaUrl.endsWith('.mp4') ? (
+              <video
+                src={activeCaseStudy.heroMediaUrl}
+                poster={activeCaseStudy.thumbnailUrl}
+                autoPlay
+                muted
+                loop
+                playsInline
+                className="w-full h-full object-cover"
+              />
+            ) : (
+              <img
+                src={activeCaseStudy.heroMediaUrl}
+                alt={activeCaseStudy.title}
+                referrerPolicy="no-referrer"
+                className="w-full h-full object-cover"
+              />
+            )}
             <div className="absolute inset-0 bg-gradient-to-t from-[#090b0a] via-transparent to-black/20" />
             <div className="absolute bottom-6 left-6 right-6 flex flex-wrap items-center justify-between gap-4">
               <div className="text-xs font-mono text-white bg-black/70 px-3 py-1.5 rounded-lg backdrop-blur-md border border-white/10">
