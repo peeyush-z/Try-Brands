@@ -57,50 +57,25 @@ export const CustomCursor: React.FC = () => {
 
   return (
     <div className="pointer-events-none fixed inset-0 z-50 overflow-hidden">
-      {/* Primary animated follower */}
+      {/* Subtle minimalist cursor ring */}
       <motion.div
         className="fixed top-0 left-0 flex items-center justify-center rounded-full pointer-events-none"
         animate={{
-          x: position.x - (isMedia ? 42 : isHover ? 24 : 10),
-          y: position.y - (isMedia ? 42 : isHover ? 24 : 10),
-          width: isMedia ? 84 : isHover ? 48 : 20,
-          height: isMedia ? 84 : isHover ? 48 : 20,
-          backgroundColor: isMedia ? '#ccff00' : isHover ? 'rgba(204, 255, 0, 0.2)' : 'transparent',
-          borderColor: isMedia ? '#ccff00' : '#ccff00',
-          borderWidth: isMedia ? 0 : isHover ? 2 : 1.5,
-          scale: 1,
+          x: position.x - (isHover ? 16 : 6),
+          y: position.y - (isHover ? 16 : 6),
+          width: isHover ? 32 : 12,
+          height: isHover ? 32 : 12,
+          backgroundColor: isHover ? 'rgba(204, 255, 0, 0.15)' : 'rgba(255, 255, 255, 0.4)',
+          borderColor: isHover ? '#ccff00' : 'transparent',
+          borderWidth: isHover ? 1 : 0,
         }}
         transition={{
           type: 'spring',
-          damping: 24,
-          stiffness: 280,
-          mass: 0.4,
+          damping: 28,
+          stiffness: 350,
+          mass: 0.2,
         }}
-      >
-        {isMedia && cursorText && (
-          <span className="font-display text-[10px] font-extrabold uppercase tracking-widest text-black select-none">
-            {cursorText}
-          </span>
-        )}
-      </motion.div>
-
-      {/* Center pinpoint indicator */}
-      {!isMedia && (
-        <motion.div
-          className="fixed top-0 left-0 w-1.5 h-1.5 bg-[#ccff00] rounded-full pointer-events-none"
-          animate={{
-            x: position.x - 3,
-            y: position.y - 3,
-            opacity: isHover ? 0 : 1,
-          }}
-          transition={{
-            type: 'spring',
-            damping: 30,
-            stiffness: 400,
-            mass: 0.1,
-          }}
-        />
-      )}
+      />
     </div>
   );
 };

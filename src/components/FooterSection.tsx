@@ -42,28 +42,28 @@ export const FooterSection: React.FC = () => {
     <footer className="relative bg-[#050605] border-t border-[#1f2621]/80 text-[#a1a1aa] overflow-hidden pt-20 pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Massive Kinetic Headline Call-to-Action */}
-        <div className="pb-16 border-b border-[#1b221d]">
-          <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#ccff00] mb-4">
-            <span className="w-2 h-2 rounded-full bg-[#ccff00]" />
-            <span>ACCEPTING SELECT Q2/Q3 2026 ENGAGEMENTS</span>
+        <div className="pb-14 border-b border-zinc-900">
+          <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#ccff00] mb-3">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#ccff00]" />
+            <span>ACCEPTING SELECT 2026 ENGAGEMENTS</span>
           </div>
 
-          <h2 style={{ fontSize: 'clamp(2.1rem, 7.8vw, 81.8px)' }} className="font-extrabold tracking-tight text-white leading-[1.05] font-display break-words max-w-full">
-            LET'S BUILD SOMETHING <br />
-            <span style={{ fontSize: 'clamp(2.1rem, 7.8vw, 81.8px)' }} className="text-transparent bg-clip-text bg-gradient-to-r from-white via-[#e4e4e7] to-[#ccff00] break-words">
-              UNFORGETTABLE.
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-white leading-[1.1] font-display break-words max-w-2xl">
+            Let's build something <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-zinc-200 to-[#ccff00]">
+              Unforgettable.
             </span>
           </h2>
 
-          <div className="mt-8 flex flex-wrap items-center gap-4">
+          <div className="mt-8 flex flex-wrap items-center gap-3">
             <button
               onClick={() => {
                 sound.playPop(750);
                 setIsInquiryOpen(true);
               }}
-              onMouseEnter={() => setCursor('hover', 'START')}
+              onMouseEnter={() => setCursor('hover')}
               onMouseLeave={() => setCursor('default')}
-              className="px-8 py-5 text-sm sm:text-base font-bold font-mono uppercase tracking-wider text-black bg-[#ccff00] hover:bg-[#d4ff3f] active:scale-95 rounded-xl transition-all shadow-[0_0_40px_-5px_rgba(204,255,0,0.5)] flex items-center gap-2 cursor-pointer"
+              className="px-6 py-3.5 text-xs font-mono font-bold uppercase tracking-wider text-black bg-[#ccff00] hover:bg-[#d4ff3f] active:scale-95 rounded-lg transition-colors flex items-center gap-2 cursor-pointer"
             >
               <span>Schedule Strategic Discovery</span>
               <ArrowUpRight className="w-4 h-4" />
@@ -73,7 +73,7 @@ export const FooterSection: React.FC = () => {
               href="mailto:partner@try-brands.com"
               onMouseEnter={() => setCursor('hover')}
               onMouseLeave={() => setCursor('default')}
-              className="px-7 py-5 text-sm sm:text-base font-mono uppercase tracking-wider text-white border border-[#232b25] hover:border-[#ccff00]/50 rounded-xl bg-[#0f1210] transition-colors"
+              className="px-5 py-3.5 text-xs font-mono text-zinc-300 border border-zinc-800 hover:border-zinc-700 rounded-lg bg-zinc-900/60 transition-colors"
             >
               partner@try-brands.com
             </a>

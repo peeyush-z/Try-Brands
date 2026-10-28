@@ -35,116 +35,113 @@ export const HeroSection: React.FC = () => {
           loop
           playsInline
           onLoadedData={() => setVideoLoaded(true)}
-          className={`w-full h-full object-cover opacity-25 scale-105 transition-opacity duration-1000 ${
-            videoLoaded ? 'opacity-25' : 'opacity-0'
+          className={`w-full h-full object-cover transition-opacity duration-1000 ${
+            videoLoaded ? 'opacity-20' : 'opacity-0'
           }`}
           src="/videos/hero-reel.mp4"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#070707] via-[#070707]/70 to-[#070707]/90" />
-        <div className="absolute inset-0 grain-overlay opacity-60" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#070707] via-[#070707]/80 to-[#070707]/90" />
+        <div className="absolute inset-0 grain-overlay opacity-40" />
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full my-auto overflow-hidden">
-        <div className="max-w-4xl space-y-6 sm:space-y-8">
+        <div className="max-w-3xl space-y-6 sm:space-y-8">
           {/* Subtle Category Kicker - Clean unboxed text */}
-          <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-[10px] sm:text-xs font-mono uppercase tracking-widest text-[#8e9290]">
-            <span className="text-[#ccff00]">TRY-BRANDS STUDIO</span>
-            <span aria-hidden="true" className="text-[#2e3731]">/</span>
-            <span>RNO1-INSPIRED DIGITAL FLAGSHIP</span>
-            <span aria-hidden="true" className="text-[#2e3731]">/</span>
-            <span>EST. 2026</span>
+          <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-xs font-mono uppercase tracking-widest text-zinc-500">
+            <span className="text-[#ccff00]">TRY-BRANDS</span>
+            <span aria-hidden="true" className="text-zinc-700">/</span>
+            <span>BRAND EXPERIENCE & MOTION</span>
+            <span aria-hidden="true" className="text-zinc-700">/</span>
+            <span>2026</span>
           </div>
 
-          {/* Kinetic Headline */}
-          <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-[5.5rem] font-extrabold tracking-tight text-white leading-[1.04] font-display break-words max-w-full">
-            ARCHITECTS OF <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-[#f0f0f0] to-[#ccff00]">
-              DIGITAL DESIRE.
+          {/* Refined Minimalist Headline */}
+          <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white leading-[1.08] font-display break-words">
+            Architects of <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-white via-zinc-200 to-[#ccff00]">
+              Digital Brand Desire.
             </span>
           </h1>
 
           {/* Value proposition subtext */}
-          <p className="text-lg sm:text-xl text-[#a1a1aa] max-w-2xl font-normal leading-relaxed">
-            We partner with category leaders and ambitious founders to forge disruptive brand identities,
-            3D motion, and fluid web experiences that leave competitors obsolete.
+          <p className="text-base sm:text-lg text-zinc-400 max-w-xl font-normal leading-relaxed">
+            We partner with category leaders and ambitious founders to engineer distinctive brand identities,
+            short-form video systems, and immersive web flagships.
           </p>
 
-          {/* Actions */}
-          <div className="flex flex-wrap items-center gap-4 pt-2">
+          {/* Clean Minimalist Actions */}
+          <div className="flex flex-wrap items-center gap-3 pt-1">
             <button
               onClick={() => {
                 sound.playPop(700);
                 setIsInquiryOpen(true);
               }}
-              onMouseEnter={() => setCursor('hover', 'TALK')}
+              onMouseEnter={() => setCursor('hover')}
               onMouseLeave={() => setCursor('default')}
-              className="px-7 py-4 text-xs sm:text-sm font-bold font-mono uppercase tracking-wider text-black bg-[#ccff00] hover:bg-[#d4ff3f] active:scale-95 rounded-lg transition-all shadow-[0_0_35px_-8px_rgba(204,255,0,0.5)] cursor-pointer"
+              className="px-6 py-3.5 text-xs font-mono font-bold uppercase tracking-wider text-black bg-[#ccff00] hover:bg-[#d4ff3f] active:scale-95 rounded-lg transition-colors cursor-pointer"
             >
               Initiate Discovery
             </button>
 
             <button
               onClick={handleWatchShowreel}
-              onMouseEnter={() => setCursor('media', 'PLAY')}
+              onMouseEnter={() => setCursor('hover')}
               onMouseLeave={() => setCursor('default')}
-              className="group flex items-center gap-3 px-6 py-4 text-xs sm:text-sm font-bold font-mono uppercase tracking-wider text-white border border-[#232b25] hover:border-[#ccff00]/50 rounded-lg bg-[#0e110f]/80 backdrop-blur-sm transition-all cursor-pointer"
+              className="group flex items-center gap-2.5 px-5 py-3.5 text-xs font-mono font-medium uppercase tracking-wider text-zinc-300 border border-zinc-800 hover:border-zinc-600 rounded-lg bg-zinc-900/60 backdrop-blur-sm transition-colors cursor-pointer"
             >
-              <div className="w-6 h-6 rounded-full bg-[#1b221d] flex items-center justify-center group-hover:bg-[#ccff00] group-hover:text-black transition-colors">
-                <Play className="w-3 h-3 fill-current ml-0.5" />
-              </div>
-              <span>Watch 2026 Reel</span>
+              <Play className="w-3.5 h-3.5 text-[#ccff00] fill-current" />
+              <span>Watch Reel</span>
             </button>
 
             <button
               onClick={scrollToWork}
               onMouseEnter={() => setCursor('hover')}
               onMouseLeave={() => setCursor('default')}
-              className="hidden lg:flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#8e9290] hover:text-white transition-colors ml-4 cursor-pointer"
+              className="hidden lg:flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-zinc-500 hover:text-white transition-colors ml-3 cursor-pointer"
             >
-              <ArrowDown className="w-3.5 h-3.5 text-[#ccff00] animate-bounce" />
-              <span>Scroll to explore</span>
+              <ArrowDown className="w-3.5 h-3.5 text-[#ccff00]" />
+              <span>Scroll</span>
             </button>
           </div>
         </div>
       </div>
 
-      {/* Full-width 4-metric strip below hero */}
-      <div className="relative z-10 w-full mt-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-8 border-t border-[#1f2621]/80">
-          <div className="p-4 rounded-lg bg-[#0b0d0c]/70 border border-[#1a201c]">
-            <div className="text-2xl sm:text-3xl font-extrabold text-[#ccff00] font-mono-tabular">
+      {/* Clean Uncluttered Metrics Strip */}
+      <div className="relative z-10 w-full mt-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 pt-6 border-t border-zinc-900">
+          <div>
+            <div className="text-xl sm:text-2xl font-bold text-white font-mono-tabular">
               $180M+
             </div>
-            <div className="text-xs text-[#8e9290] mt-1 font-mono uppercase tracking-wide">
-              Client Venture Capital
+            <div className="text-xs text-zinc-500 mt-0.5 font-mono">
+              Client Venture Raised
             </div>
           </div>
 
-          <div className="p-4 rounded-lg bg-[#0b0d0c]/70 border border-[#1a201c]">
-            <div className="text-2xl sm:text-3xl font-extrabold text-white font-mono-tabular">
+          <div>
+            <div className="text-xl sm:text-2xl font-bold text-white font-mono-tabular">
               38+
             </div>
-            <div className="text-xs text-[#8e9290] mt-1 font-mono uppercase tracking-wide">
-              Awwwards & FWA Honors
+            <div className="text-xs text-zinc-500 mt-0.5 font-mono">
+              Design & FWA Honors
             </div>
           </div>
 
-          <div className="p-4 rounded-lg bg-[#0b0d0c]/70 border border-[#1a201c]">
-            <div className="text-2xl sm:text-3xl font-extrabold text-white font-mono-tabular">
+          <div>
+            <div className="text-xl sm:text-2xl font-bold text-white font-mono-tabular">
               10
             </div>
-            <div className="text-xs text-[#8e9290] mt-1 font-mono uppercase tracking-wide">
-              Global Category Leaders
+            <div className="text-xs text-zinc-500 mt-0.5 font-mono">
+              Enterprise Partners
             </div>
           </div>
 
-          <div className="p-4 rounded-lg bg-[#0b0d0c]/70 border border-[#1a201c]">
-            <div className="text-2xl sm:text-3xl font-extrabold text-[#ccff00] font-mono-tabular flex items-center gap-1.5">
-              <span>99.2%</span>
-              <Sparkles className="w-4 h-4 text-[#ccff00]" />
+          <div>
+            <div className="text-xl sm:text-2xl font-bold text-[#ccff00] font-mono-tabular">
+              +240%
             </div>
-            <div className="text-xs text-[#8e9290] mt-1 font-mono uppercase tracking-wide">
-              Client Retention Rate
+            <div className="text-xs text-zinc-500 mt-0.5 font-mono">
+              D2C Velocity Metric
             </div>
           </div>
         </div>

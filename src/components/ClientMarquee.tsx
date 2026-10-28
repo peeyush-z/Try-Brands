@@ -41,15 +41,13 @@ export const ClientMarquee: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-10">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
           <div>
-            <div className="flex flex-wrap items-center gap-2 text-[10px] sm:text-xs font-mono uppercase tracking-widest text-[#8e9290] mb-2">
-              <span className="text-[#ccff00]">GLOBAL CLIENT PORTFOLIO</span>
+            <div className="flex flex-wrap items-center gap-2 text-xs font-mono uppercase tracking-widest text-zinc-500 mb-2">
+              <span className="text-[#ccff00]">CLIENT PARTNERS</span>
               <span aria-hidden="true">·</span>
-              <span>10 ENTERPRISE PARTNERS</span>
-              <span aria-hidden="true">·</span>
-              <span>ESTABLISHED 2023–2026</span>
+              <span>10 ENTERPRISE ROSTER</span>
             </div>
-            <h2 className="text-xl sm:text-3xl md:text-4xl font-extrabold tracking-tight text-white font-display break-words">
-              Trusted by 10 Industry Vanguard Brands
+            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white font-display break-words">
+              Trusted by Industry Vanguard Brands
             </h2>
           </div>
 
@@ -62,18 +60,18 @@ export const ClientMarquee: React.FC = () => {
               }}
               onMouseEnter={() => setCursor('hover')}
               onMouseLeave={() => setCursor('default')}
-              className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-[#232b25] bg-[#0d100e] text-xs font-mono text-[#8e9290] hover:text-[#ccff00] hover:border-[#ccff00]/40 transition-colors cursor-pointer"
+              className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-zinc-800 bg-zinc-900/60 text-xs font-mono text-zinc-400 hover:text-white transition-colors cursor-pointer"
               aria-pressed={isPaused}
               aria-label={isPaused ? 'Play infinite client carousel' : 'Pause infinite client carousel for accessibility'}
             >
               {isPaused ? <Play className="w-3.5 h-3.5 text-[#ccff00]" /> : <Pause className="w-3.5 h-3.5" />}
-              <span>{isPaused ? 'Auto-Scroll Paused' : 'Hover / Tap to Pause'}</span>
+              <span>{isPaused ? 'Resume' : 'Pause'}</span>
             </button>
           </div>
         </div>
       </div>
 
-      {/* Infinite Horizontal Client Reel with Touch Handling & Smooth Hover Transitions */}
+      {/* Infinite Horizontal Client Reel - Clean & Uncluttered */}
       <div
         ref={containerRef}
         className="relative w-full overflow-hidden"
@@ -84,7 +82,7 @@ export const ClientMarquee: React.FC = () => {
         role="region"
         aria-live="polite"
       >
-        {/* Soft edge fade masks for seamless bleed */}
+        {/* Soft edge fade masks */}
         <div className="pointer-events-none absolute left-0 top-0 bottom-0 w-12 sm:w-24 bg-gradient-to-r from-[#070908] to-transparent z-10" />
         <div className="pointer-events-none absolute right-0 top-0 bottom-0 w-12 sm:w-24 bg-gradient-to-l from-[#070908] to-transparent z-10" />
 
@@ -104,25 +102,25 @@ export const ClientMarquee: React.FC = () => {
                 setActiveClientInfo(client);
               }}
               onMouseEnter={() => {
-                setCursor('hover', 'CLIENT');
+                setCursor('hover');
                 setActiveClientInfo(client);
               }}
               onMouseLeave={() => {
                 setCursor('default');
               }}
-              className="group relative w-72 sm:w-80 p-6 rounded-xl bg-[#0d100e] border border-[#1f2621] hover:border-[#ccff00] hover:bg-[#121613] transition-all duration-300 flex-shrink-0 cursor-pointer select-none flex flex-col justify-between"
+              className="group relative w-72 sm:w-80 p-5 sm:p-6 rounded-xl bg-zinc-950 border border-zinc-800/80 hover:border-zinc-700 transition-colors duration-300 flex-shrink-0 cursor-pointer select-none flex flex-col justify-between"
             >
               <div>
                 {/* Header: Partnership Year & Client Index */}
-                <div className="flex items-center justify-between text-[11px] font-mono text-[#8e9290] mb-4">
-                  <span className="tracking-wider text-[#ccff00]/90">{client.partnershipYear}</span>
-                  <span className="text-[#3c473f]">0{((idx % 10) + 1).toString().padStart(2, '0')}</span>
+                <div className="flex items-center justify-between text-[11px] font-mono text-zinc-500 mb-4">
+                  <span className="text-[#ccff00] font-medium">{client.partnershipYear}</span>
+                  <span className="text-zinc-600">0{((idx % 10) + 1).toString().padStart(2, '0')}</span>
                 </div>
 
-                {/* Brand Typographic Monogram / Logo Mark */}
-                <div className="flex items-center gap-3 mb-4">
+                {/* Brand Monogram / Logo Mark - NO zoom in */}
+                <div className="flex items-center gap-3.5 mb-4">
                   {client.logoUrl ? (
-                    <div className="w-12 h-12 rounded-lg bg-white/95 border border-[#263129] p-1 flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform overflow-hidden shadow-md">
+                    <div className="w-11 h-11 rounded-lg bg-white/95 border border-zinc-800 p-1 flex items-center justify-center flex-shrink-0 overflow-hidden">
                       <img
                         src={client.logoUrl}
                         alt={`${client.name} logo`}
@@ -131,12 +129,12 @@ export const ClientMarquee: React.FC = () => {
                       />
                     </div>
                   ) : (
-                    <div className="w-10 h-10 rounded-lg bg-[#161d18] border border-[#263129] flex items-center justify-center font-display font-extrabold text-[#ccff00] text-sm tracking-wider group-hover:scale-105 group-hover:border-[#ccff00]/40 transition-transform">
+                    <div className="w-11 h-11 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center font-display font-bold text-[#ccff00] text-xs tracking-wider">
                       {client.symbolText.slice(0, 3)}
                     </div>
                   )}
                   <div>
-                    <h3 className="text-lg font-bold text-white group-hover:text-[#ccff00] transition-colors font-display tracking-tight flex items-center gap-1.5">
+                    <h3 className="text-base font-bold text-white group-hover:text-zinc-200 transition-colors tracking-tight flex items-center gap-1.5">
                       <span>{client.name}</span>
                       {client.websiteUrl && (
                         <a
@@ -144,14 +142,14 @@ export const ClientMarquee: React.FC = () => {
                           target="_blank"
                           rel="noopener noreferrer"
                           onClick={(e) => e.stopPropagation()}
-                          className="text-[#8e9290] hover:text-[#ccff00] transition-colors"
+                          className="text-zinc-500 hover:text-white transition-colors"
                           title="Visit official website"
                         >
                           <ArrowRight className="w-3 h-3 -rotate-45" />
                         </a>
                       )}
                     </h3>
-                    <p className="text-xs text-[#8e9290] font-sans">
+                    <p className="text-xs text-zinc-500 font-sans">
                       {client.industry}
                     </p>
                   </div>
@@ -159,17 +157,17 @@ export const ClientMarquee: React.FC = () => {
               </div>
 
               {/* Verified Result Metric */}
-              <div className="mt-4 pt-4 border-t border-[#1b221d] flex items-center justify-between">
+              <div className="mt-4 pt-3.5 border-t border-zinc-900 flex items-center justify-between">
                 <div>
-                  <div className="text-[10px] uppercase font-mono tracking-widest text-[#8e9290]">
+                  <div className="text-[10px] uppercase font-mono tracking-widest text-zinc-500">
                     Verified Outcome
                   </div>
-                  <div className="text-sm font-bold text-white font-mono-tabular group-hover:text-[#ccff00] transition-colors">
+                  <div className="text-xs sm:text-sm font-semibold text-white font-mono-tabular">
                     {client.impactMetric}
                   </div>
                 </div>
-                <div className="w-7 h-7 rounded-full bg-[#18201a] flex items-center justify-center text-[#8e9290] group-hover:text-black group-hover:bg-[#ccff00] transition-all">
-                  <ArrowRight className="w-3.5 h-3.5" />
+                <div className="w-6 h-6 rounded-full bg-zinc-900 flex items-center justify-center text-zinc-500 group-hover:text-white group-hover:bg-zinc-800 transition-colors">
+                  <ArrowRight className="w-3 h-3" />
                 </div>
               </div>
             </div>

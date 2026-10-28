@@ -29,114 +29,110 @@ export const ProofSection: React.FC = () => {
   return (
     <section id="proof" className="py-24 border-b border-[#1f2621]/80 bg-[#070707] relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Kinetic Metric Counters Grid */}
-        <div className="mb-20">
-          <div className="flex flex-wrap items-center gap-2 text-[10px] sm:text-xs font-mono uppercase tracking-widest text-[#8e9290] mb-2">
-            <span className="text-[#ccff00]">QUANTITATIVE RIGOR</span>
+        {/* Kinetic Metric Counters Grid - Clean Swiss Style */}
+        <div className="mb-16">
+          <div className="flex flex-wrap items-center gap-2 text-xs font-mono uppercase tracking-widest text-zinc-500 mb-2">
+            <span className="text-[#ccff00]">QUANTITATIVE IMPACT</span>
             <span aria-hidden="true">·</span>
-            <span>MEASURABLE ENTERPRISE OUTCOMES</span>
+            <span>MEASURABLE OUTCOMES</span>
           </div>
-          <h2 className="text-2xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white font-display break-words mb-12">
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight text-white font-display break-words mb-10">
             Proof of Transformational Impact
           </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div className="p-8 rounded-2xl bg-[#0d100e] border border-[#1f2621] relative overflow-hidden group hover:border-[#ccff00] transition-colors">
-              <div className="text-4xl sm:text-5xl font-extrabold text-[#ccff00] font-mono-tabular tracking-tight">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 pt-6 border-t border-zinc-900">
+            <div className="space-y-1">
+              <div className="text-3xl sm:text-4xl font-bold text-white font-mono-tabular">
                 $180M+
               </div>
-              <div className="mt-3 text-sm font-bold text-white font-display">
+              <div className="text-sm font-semibold text-zinc-200">
                 Venture Capital Raised
               </div>
-              <p className="mt-1 text-xs text-[#8e9290] leading-relaxed">
+              <p className="text-xs text-zinc-500 leading-relaxed">
                 By client partners across Seed to Series C following visual repositioning.
               </p>
             </div>
 
-            <div className="p-8 rounded-2xl bg-[#0d100e] border border-[#1f2621] relative overflow-hidden group hover:border-[#ccff00] transition-colors">
-              <div className="text-4xl sm:text-5xl font-extrabold text-white font-mono-tabular tracking-tight">
+            <div className="space-y-1">
+              <div className="text-3xl sm:text-4xl font-bold text-white font-mono-tabular">
                 38+
               </div>
-              <div className="mt-3 text-sm font-bold text-white font-display">
+              <div className="text-sm font-semibold text-zinc-200">
                 Global Design Honors
               </div>
-              <p className="mt-1 text-xs text-[#8e9290] leading-relaxed">
+              <p className="text-xs text-zinc-500 leading-relaxed">
                 Awwwards Site of the Day, FWA of the Month, and Red Dot: Best of Best.
               </p>
             </div>
 
-            <div className="p-8 rounded-2xl bg-[#0d100e] border border-[#1f2621] relative overflow-hidden group hover:border-[#ccff00] transition-colors">
-              <div className="text-4xl sm:text-5xl font-extrabold text-white font-mono-tabular tracking-tight">
+            <div className="space-y-1">
+              <div className="text-3xl sm:text-4xl font-bold text-white font-mono-tabular">
                 48+
               </div>
-              <div className="mt-3 text-sm font-bold text-white font-display">
+              <div className="text-sm font-semibold text-zinc-200">
                 Global Category Brands
               </div>
-              <p className="mt-1 text-xs text-[#8e9290] leading-relaxed">
+              <p className="text-xs text-zinc-500 leading-relaxed">
                 From San Francisco and New York to Tokyo, London, and Berlin.
               </p>
             </div>
 
-            <div className="p-8 rounded-2xl bg-[#0d100e] border border-[#1f2621] relative overflow-hidden group hover:border-[#ccff00] transition-colors">
-              <div className="text-4xl sm:text-5xl font-extrabold text-[#ccff00] font-mono-tabular tracking-tight">
+            <div className="space-y-1">
+              <div className="text-3xl sm:text-4xl font-bold text-[#ccff00] font-mono-tabular">
                 99.2%
               </div>
-              <div className="mt-3 text-sm font-bold text-white font-display">
-                Client Retention & Re-up
+              <div className="text-sm font-semibold text-zinc-200">
+                Client Retention Rate
               </div>
-              <p className="mt-1 text-xs text-[#8e9290] leading-relaxed">
+              <p className="text-xs text-zinc-500 leading-relaxed">
                 Annual recurring creative advisory partnerships and design retainers.
               </p>
             </div>
           </div>
         </div>
 
-        {/* Executive Testimonial Carousel */}
+        {/* Executive Testimonial Carousel - Minimalist & Refined */}
         {current && (
-          <div className="rounded-3xl bg-[#0b0e0c] border border-[#222a24] p-8 sm:p-12 lg:p-16 relative overflow-hidden">
-            {/* Ambient Acid Hue */}
-            <div className="absolute top-0 right-0 w-96 h-96 bg-[#ccff00]/5 rounded-full blur-3xl pointer-events-none" />
-
-            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+          <div className="rounded-xl bg-zinc-950 border border-zinc-800/80 p-6 sm:p-10 lg:p-12 relative overflow-hidden">
+            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
               {/* Left Quote & Narrative */}
-              <div className="lg:col-span-8 space-y-6">
-                <div className="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#ccff00]">
-                  <Quote className="w-4 h-4 fill-current rotate-180" />
-                  <span>Executive Endorsement</span>
+              <div className="lg:col-span-8 space-y-5">
+                <div className="text-xs font-mono uppercase tracking-widest text-[#ccff00]">
+                  Client Endorsement
                 </div>
 
-                <blockquote className="text-xl sm:text-2xl md:text-3xl text-white font-normal leading-relaxed font-display text-balance">
+                <blockquote className="text-lg sm:text-xl md:text-2xl text-zinc-100 font-normal leading-relaxed text-balance">
                   "{current.quote}"
                 </blockquote>
 
-                <div className="pt-4 border-t border-[#1f2621] flex flex-wrap items-center justify-between gap-4">
-                  <div className="flex items-center gap-4">
+                <div className="pt-4 border-t border-zinc-900 flex flex-wrap items-center justify-between gap-4">
+                  <div className="flex items-center gap-3">
                     <img
                       src={current.avatarUrl}
                       alt={current.author}
                       referrerPolicy="no-referrer"
-                      className="w-12 h-12 rounded-full object-cover border border-[#303c33]"
+                      className="w-10 h-10 rounded-full object-cover border border-zinc-800"
                     />
                     <div>
-                      <div className="text-base font-bold text-white font-display">
+                      <div className="text-sm font-bold text-white">
                         {current.author}
                       </div>
-                      <div className="text-xs text-[#8e9290] font-mono">
-                        {current.role} · <span className="text-white">{current.company}</span>
+                      <div className="text-xs text-zinc-500 font-mono">
+                        {current.role} · <span className="text-zinc-300">{current.company}</span>
                       </div>
                     </div>
                   </div>
 
                   {/* Impact Metric Badge */}
-                  <div className="px-4 py-2 rounded-xl bg-[#121614] border border-[#263128] font-mono text-xs">
-                    <span className="text-[#8e9290]">{current.metricLabel}: </span>
-                    <span className="text-[#ccff00] font-bold">{current.metricValue}</span>
+                  <div className="px-3 py-1.5 rounded-lg bg-zinc-900 border border-zinc-800 font-mono text-xs">
+                    <span className="text-zinc-400">{current.metricLabel}: </span>
+                    <span className="text-[#ccff00] font-semibold">{current.metricValue}</span>
                   </div>
                 </div>
               </div>
 
               {/* Right Controls & Carousel Indicator */}
-              <div className="lg:col-span-4 flex flex-col items-center lg:items-end justify-between space-y-6 lg:border-l lg:border-[#1f2621] lg:pl-10">
+              <div className="lg:col-span-4 flex flex-col items-center lg:items-end justify-between space-y-4 lg:border-l lg:border-zinc-900 lg:pl-8">
                 <div className="text-center lg:text-right">
                   <div className="text-4xl font-extrabold text-[#ccff00] font-mono-tabular">
                     0{activeIdx + 1}
